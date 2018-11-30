@@ -1,0 +1,56 @@
+Dim TB As Word.Table
+
+Private Sub CBCreateTBL_Click()
+ActiveDocument.Range.Delete
+NumRows = ListChoice.ListCount
+NumColumns = ListChoice.ListCount
+Set TB = ActiveDocument.Tables.Add(ActiveDocument.Range(0, 0), NumRows, NumColumns)
+With TB
+  For i = 1 To .Rows.Count Step 1
+    .Rows(i).Shading.Texture = wdTexture100Percent
+       ' or
+    .Rows(i).Shading.BackgroundPatternColor = RGB(255, 5, 241)
+    .Rows(i).Borders.Enable = True
+    
+  Next
+End With
+End Sub
+
+Private Sub CBFillTBL_Click()
+
+End Sub
+
+Private Sub CBSel_Click()
+If ListInit.ListIndex = -1 Then
+ListChoice.AddItem ListInit.List(0)
+ListInit.RemoveItem (0)
+Else
+ListChoice.AddItem ListInit.List(ListInit.ListIndex)
+ListInit.RemoveItem ListInit.ListIndex
+End If
+
+CBCreateTBL.Enabled = True
+
+
+
+
+
+End Sub
+
+Private Sub ListInit_Click()
+
+End Sub
+
+Private Sub UserForm_Initialize()
+CBCreateTBL.Enabled = False
+CBFillTBL.Enabled = False
+ListInit.AddItem "First Name"
+ListInit.AddItem "Lastname"
+ListInit.AddItem "Address"
+ListInit.AddItem "Gender"
+ListInit.AddItem "Age"
+ListInit.AddItem "Martial status"
+ListInit.AddItem "Job"
+
+
+End Sub
